@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: E10;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4b5563;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-menu a:hover, .mobile-menu a.active {
+            background-color: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 70px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Bio Section */
+        #bio {
+            background-color: white;
+        }
+
+        .bio-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .bio-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .bio-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        .bio-text h1 span {
+            color: #2563eb;
+        }
+
+        .bio-text .subtitle {
+            font-size: 1.25rem;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .bio-text p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .bio-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .cta-button svg {
+            margin-left: 0.5rem;
+        }
+
+        /* Portfolio Section */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .project-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-details {
+            flex: 1;
+            padding: 2rem;
+            min-width: 300px;
+        }
+
+        .project-category {
+            text-transform: uppercase;
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        .project-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: #2563eb;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #1d4ed8;
+        }
+
+        .project-link svg {
+            margin-left: 0.25rem;
+        }
+
+        /* Elevator Pitch Section */
+        #elevator-pitch {
+            background-color: white;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            background-color: #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #6b7280;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .contact-info p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+
+        .contact-links a svg {
+            margin-right: 0.5rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            color: #111827;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 2rem 0;
+            text-align: center;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu.show {
+                display: block;
+            }
+
+            .bio-content {
+                flex-direction: column-reverse;
+            }
+
+            .bio-image {
+                margin: 0 auto;
+            }
+
+            .project-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">My Portfolio</div>
+            <div class="nav-links">
+                <a href="#bio" class="active">Bio</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#elevator-pitch">Elevator Pitch</a>
+                <a href="#contact">Contact Me</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+        <div class="mobile-menu">
+            <a href="#bio" class="active">Bio</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#elevator-pitch">Elevator Pitch</a>
+            <a href="#contact">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Bio Section -->
+        <section id="bio">
+            <div class="container bio-content">
+                <div class="bio-text">
+                    <h1>Hello, I'm <span>Halim Oumaima</span></h1>
+                    <p class="subtitle">IT Architect Student</p>
+                    <p>
+                        I'm an aspiring IT architect with a passion for designing digital infrastructures that bridge technology and human needs. My unique approach combines technical expertise with creative problem-solving, allowing me to craft solutions that are both functional and forward-thinking.
+						Architecture—whether digital or physical—has always fascinated me. I find joy in the elegant organization of systems and the transformative power of thoughtful design. As I continue my education in IT architecture, I'm developing the skills to turn complex technical challenges into seamless experiences.
+						My journey in this field isn't just about building systems; it's about creating digital spaces where innovation thrives. Through my future work, I aim to develop infrastructures that not only meet current demands but evolve alongside emerging technologies.
+                    </p>
+                    <a href="#contact" class="cta-button">
+                        Get in Touch
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="bio-image">
+                    <!-- Replace with your professional image -->
+                    <img src="./professional-pic.jpg" alt="Professional headshot">
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My Portfolio</h2>
+                    <p>Here's a showcase of my recent work and the projects I'm proud of.</p>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-image">
+                            <!-- Project image placeholder -->
+                            <img src="./sonnarsage.png" alt="Multimodel Assistant Project">
+                        </div>
+                        <div class="project-details">
+                            <div class="project-category">UX/UI Design</div>
+                            <h3 class="project-title">Multimodel Assistant</h3>
+                            <p class="project-description">
+                                Our team project is a Chrome extension designed to break communication barriers for deaf users, especially deaf students. The extension provides real-time captioning and integrates gesture/sign recognition technologies to convert spoken language into on-screen text and visual cues.
+                            </p>
+                            <a href="https://www.figma.com/proto/0ReyhlK03UpnTDChahgy1g/Multimodel-Assistant?page-id=9%3A491&node-id=416-765&node-type=frame&viewport=1635%2C1789%2C0.08&t=KrXTd0EYXUuwJgWF-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=416%3A765&show-proto-sidebar=1" class="project-link" target="_blank">
+                                View Figma Design
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a> 
+							<a href="https://youtu.be/0M9z9ndyBJg" class="project-link" target="_blank">
+                                View Pitch Presentation
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elevator Pitch Section -->
+        <section id="elevator-pitch">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Elevator Pitch</h2>
+                    <p>A brief introduction to who I am and what I do.</p>
+                </div>
+                <div class="video-container">
+                    <p>Pitch Video</p>
+                    <!-- Video will be added later -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact Me</h2>
+                    <p>Interested in working together? Let's connect!</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Get In Touch</h3>
+                        <p>
+                            I'm currently available for freelance work and new opportunities. 
+                            Whether you have a project in mind or just want to chat, feel free to reach out!
+                        </p>
+                        <div class="contact-links">
+                            <a href="mailto:oumaimahalim.pro@gmail.com">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                Email
+                            </a>
+                            <a href="https://www.linkedin.com/in/oumaimahalim/" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                                LinkedIn
+                            </a>
+                            <a href="https://github.com/3umi" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .cta-button').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Update active link
+                document.querySelectorAll('nav a').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                
+                document.querySelectorAll(`nav a[href="${targetId}"]`).forEach(navLink => {
+                    navLink.classList.add('active');
+                });
+                
+                // Close mobile menu if open
+                mobileMenu.classList.remove('show');
+            });
+        });
+
+        // Active link on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    document.querySelectorAll('nav a').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    
+                    document.querySelectorAll(`nav a[href="#${sectionId}"]`).forEach(navLink => {
+                        navLink.classList.add('active');
+                    });
+                }
+            });
+        });
+
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to a server
+            // For now, we'll just log it and show a success message
+            console.log('Form submission:', { name, email, message });
+            
+            alert('Thanks for your message! I\'ll get back to you soon.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
